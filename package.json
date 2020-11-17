@@ -1,0 +1,19 @@
+{
+  "name": "ScheduledCommandsSQL",
+  "version": "1.0.0",
+  "main": "main.js",
+  "repository": "https://github.com/MarquesSouza/ScheduledCommandsSQL.git",
+  "author": "Marques <marquesde2013@gmail.com>",
+  "license": "MIT",
+  "description": "Scheduled commands SQL for desktop",
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "dependencies": {
+    "electron": "^11.0.1",
+    "electron-reload": "^1.5.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.13.0"
+  }
+}
