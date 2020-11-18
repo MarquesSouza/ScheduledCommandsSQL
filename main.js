@@ -1,11 +1,5 @@
 const { app, BrowserWindow, nativeImage } = require("electron");
 
-// Habilita o live reload no Electron e no FrontEnd da aplicação com a lib electron-reload
-// Assim que alguma alteração no código é feita
-require("electron-reload")(__dirname, {
-  // Note that the path to electron may vary according to the main file
-  electron: require(`${__dirname}/node_modules/electron`),
-});
 
 // Função que cria uma janela desktop
 function createWindow() {

@@ -7,13 +7,14 @@
   "license": "MIT",
   "description": "Scheduled commands SQL for desktop",
   "scripts": {
-    "start": "electron main.js"
+    "start": "electron main.js",
+    "build": "electron-packager ./ --platform=win32 --arch=x64 AgendadorDeComandosSql --out=../temp/",
+    "MSI":"node build_installer.js"
   },
-  "dependencies": {
-    "electron": "^11.0.1",
-    "electron-reload": "^1.5.0"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "electron": "^11.0.1",
+    "electron-wix-msi": "^3.0.4",
     "eslint": "^7.13.0"
   }
 }
