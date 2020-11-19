@@ -26,6 +26,7 @@ const msiCreator = new MSICreator({
     // Configure installer User Interface
     ui: {
         chooseDirectory: true
+        
     },
 });
 
