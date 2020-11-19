@@ -9,12 +9,13 @@
   "scripts": {
     "start": "electron main.js",
     "build": "electron-packager ./ --platform=win32 --arch=x64 AgendadorDeComandosSql --out=../temp/",
-    "MSI":"node build_installer.js"
+    "MSI": "node build_installer.js"
   },
   "dependencies": {},
   "devDependencies": {
     "electron": "^11.0.1",
     "electron-wix-msi": "^3.0.4",
-    "eslint": "^7.13.0"
+    "eslint": "^7.13.0",
+    "exe-icon-extractor": "^1.0.8"
   }
 }

@@ -20,7 +20,7 @@ const msiCreator = new MSICreator({
     description: 'Scheduled commands SQL for desktop',
     exe: 'AgendadorDeComandosSQL',
     name: 'Agendador De Comandos SQL',
-    manufacturer: 'Marques de Souza | marquesde2013@gmail.com',
+    manufacturer: 'Marques de Souza ',
     version: '1.0.0',
 
     // Configure installer User Interface
