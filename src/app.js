@@ -1,4 +1,5 @@
 import React from 'react';
+
 function app() {
   function agendar(){
 
@@ -11,29 +12,28 @@ function app() {
   }
   return (
     <div>
-        <fieldset>
-        <form className="regra" onSubmit={handleregra}>
-          <fieldset id="Regra">            
-            
-            
-            <legend>Dados da Regra</legend>
-              
+      <div className="top">
+      <h2>Agendador de Comandos SQL</h2>
+      </div>
+      <form  onSubmit={handleregra}>
+        <div className="regra">
               <div className="container-regra">
+              <fieldset >  
+                 <legend>Dados da Regra</legend>
                 <div className="form-group">
-                  <label className="col-md-4 control-label" htmlFor="name"></label>  
                   <input id="name" name="name" type="text" placeholder="Digite aqui o nome da regra" className="form-control input-md" />
                 </div>
                 <div className="form-group">
-                  <label className="col-md-4 control-label" htmlFor="datasouce">Data Souce</label>  
+                  <label htmlFor="datasouce">Data Souce</label>  
                   <input id="datasouce" name="datasouce" type="text" placeholder="Servidor\SQL2017" className="form-control input-md" />
                 </div>
                 <div className="form-group">
-                  <label className="col-md-4 control-label" htmlFor="initial">Initial Catalog</label>  
+                  <label htmlFor="initial">Initial Catalog</label>  
                   <input id="initial" name="initial" type="text" placeholder="max" className="form-control input-md"/>
                 </div>
+                </fieldset>
               </div>
-              
-          </fieldset>
+         
               <div className="container-agendamento">
                 <label className="col-md-4 control-label" htmlFor="type">Tipo de repetição</label>
                 <div className="col-md-4">
@@ -52,8 +52,8 @@ function app() {
                 </div>
               </div>
               <div className="container-comando">
-                <label className="col-md-4 control-label" htmlFor="comando">Comando SQL</label>
-                <div className="col-md-4">                     
+                <label  htmlFor="comando">Comando SQL</label>
+                <div >                     
                   <textarea className="form-control" id="comando" name="comando" >Digite aqui o comando SQL</textarea>
                 </div>
               </div>
@@ -61,15 +61,16 @@ function app() {
               
               
               <div className="container-button">
-                <label className="col-md-4 control-label" htmlFor="submit"></label>
-                <div className="col-md-4">
-                  <button id="submit" name="submit" className="btn btn-primary" disabled>Adicionar Agendamento</button>
+                <label  htmlFor="submit"></label>
+                <div >
+                  <button id="submit" name="submit" className="btn btn-primary" >Adicionar Agendamento</button>
                 </div>
               </div>
               
+         
+          </div>
           </form>
-          </fieldset>
-          <fieldset id="Agendamento">
+          <div className="lista">
             <legend>Agendamentos</legend>
               <div className="form-group">
                 <label className="col-md-4 control-label" htmlFor="searchName">Texto do Comando</label>
@@ -104,7 +105,7 @@ function app() {
                   <button id="submit" name="submit" className="btn btn-primary" disabled>Filtrar...</button>
                 </div>
               </div>
-            </fieldset>
+              </div>
        </div>
   );
 }
