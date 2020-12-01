@@ -35,8 +35,8 @@ function app() {
               </div>
          
               <div className="container-agendamento">
-                <label htmlFor="type">Tipo de repetição</label>
-                <div >
+                <label className="control-label" htmlFor="type">Tipo de repetição</label>
+                <div>
                   <div className="radio">
                     <label htmlFor="type-0">
                     <input type="radio" name="type" id="type-0" value="1" onChange />
@@ -48,54 +48,50 @@ function app() {
                       <input type="radio" name="type" id="type-1" value="2"/>
                        <span> Repetir a cada </span>
                     </label>
-                    <div class="form-group">
-  <label class="col-md-4 control-label" for="semana">Dias da Semana</label>
-  <div class="col-md-4">
-    <label class="checkbox-inline" for="semana-0">
-      <input type="checkbox" name="semana" id="semana-0" value="1"/>
-      Domingo
-    </label>
-    <label class="checkbox-inline" for="semana-1">
-      <input type="checkbox" name="semana" id="semana-1" value="2" />
-      Segunda
-    </label>
-    <label class="checkbox-inline" for="semana-2">
-      <input type="checkbox" name="semana" id="semana-2" value="3"/>
-      Terça
-    </label>
-    <label class="checkbox-inline" for="semana-3">
-      <input type="checkbox" name="semana" id="semana-3" value="4" />
-      Quarta
-    </label>
-    <label class="checkbox-inline" for="semana-4">
-      <input type="checkbox" name="semana" id="semana-4" value="5"/>
-      Quinta
-    </label>
-    <label class="checkbox-inline" for="semana-5">
-      <input type="checkbox" name="semana" id="semana-5" value="6" />
-      Sexta
-    </label>
-    <label class="checkbox-inline" for="semana-6">
-      <input type="checkbox" name="semana" id="semana-6" value="7" />
-      Sábado
-    </label>
-  </div>
-</div>
-
-<div class="form-group">
-  <label class="col-md-4 control-label" for="time">Time</label>  
-  <div class="col-md-4">
-  <input id="time" name="time" type="text" placeholder="00:00" class="form-control input-md" />
-    
-  </div>
-</div>
-
+                    <div className="week">
+                      <label className="control-label" htmlfor="semana">Dias da Semana</label>
+                      <div classNames="">
+                        <label className="checkbox-inline" htmlfor="semana-0">
+                          <input type="checkbox" name="semana" id="semana-0" value="1"/>
+                            <span>Domingo</span>
+                        </label>
+                        <label className="checkbox-inline" htmlfor="semana-1">
+                          <input type="checkbox" name="semana" id="semana-1" value="2" />
+                          <span>Segunda</span>
+                        </label>
+                        <label className="checkbox-inline" htmlfor="semana-2">
+                          <input type="checkbox" name="semana" id="semana-2" value="3"/>
+                          <span>Terça</span>
+                        </label>
+                        <label className="checkbox-inline" htmlfor="semana-3">
+                          <input type="checkbox" name="semana" id="semana-3" value="4" />
+                          <span>Quarta</span>
+                        </label>
+                        <label className="checkbox-inline" htmlfor="semana-4">
+                          <input type="checkbox" name="semana" id="semana-4" value="5"/>
+                          <span>Quinta</span>
+                        </label>
+                        <label className="checkbox-inline" htmlfor="semana-5">
+                          <input type="checkbox" name="semana" id="semana-5" value="6" />
+                          <span>Sexta</span>
+                        </label>
+                        <label className="checkbox-inline" htmlfor="semana-6">
+                          <input type="checkbox" name="semana" id="semana-6" value="7" />
+                            <span>Sábado</span>
+                        </label>
+                      </div>
+                    </div>
+                      <div className="time">
+                        <label className="control-label" htmlfor="time">Time</label>  
+                        <div className="form-group">
+                        <input id="time" name="time" type="time" placeholder="00:00"  />
+                        </div>
+                      </div>
                   </div>
-                  
                 </div>
               </div>
               <div className="container-comando">
-                <label  htmlFor="comando">Comando SQL</label>
+                <label  htmlFor="comando" className="control-label">Comando SQL</label>
                 <div >                     
                   <textarea className="form-control" id="comando" name="comando" placeholder="Digite aqui o comando SQL"></textarea>
                 </div>
@@ -105,16 +101,14 @@ function app() {
               
               <div className="container-button">
                 <label  htmlFor="submit"></label>
-                <div >
                   <button id="submit" name="submit" className="btn btn-primary" >Adicionar Agendamento</button>
-                </div>
               </div>
               
          
           </div>
-          </form>
+      </form>
           <div className="lista">
-            <legend>Agendamentos</legend>
+            <legend className="control-label">Agendamentos</legend>
               <div className="containter-filtro">
               <div className="form-group">
                 <label htmlFor="searchName">Texto do Comando</label>
