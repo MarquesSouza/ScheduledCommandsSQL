@@ -9,14 +9,19 @@ function app() {
   const [time,setTime]=useState('');
   const [command,setCommand]=useState('');
   
-  function agendar(){
-
-  }
+  const [scheduleRule,setScheduleRule]=useState([{
+    'id':'1','name':'faker','datasouce':'datafaker','initial':'bancofaker','type':'faker','days':'name','time':'name','command':'trolando 123' 
+ 
+  }])
   function filtrar(){
 
   }
   function handleCreateShedule(e){
-    alert(name+","+datasouce+","+initial+","+type+","+days+","+time+","+command);
+    e.preventDefault();
+    setScheduleRule([...scheduleRule,{
+      'id':name,'name':name,'datasouce':datasouce,'initial':initial,'type':type,'days':days,'time':time,'command':command 
+    }])
+    alert("Handle Request");
   }
   return (
     <div>
@@ -114,6 +119,17 @@ function app() {
          
           </div>
       </form>
+      <table>
+                {scheduleRule.map((item)=>
+                  <tr key={item.id}>
+                    <td>{item.name+" /"}</td>
+                    <td>{item.datasouce+" /"}</td>
+                    <td>{item.initial+" /"}</td>
+                    <td>{item.type+" /"}</td>
+                    <td>{item.command+" /"}</td>
+                  </tr>
+                 )}
+        </table>
           <div className="lista">
             <legend className="control-label">Agendamentos</legend>
               <div className="containter-filtro">
@@ -151,6 +167,8 @@ function app() {
                   
                 </div>
               </div>
+               
+                
               </div>
             </div>
           
