@@ -145,6 +145,11 @@ h2{
 }
 .container-button-filtrar button:hover{
    background-color: darkgreen;
+}
+.table{
+    width: 100%;
 } 
-  
+td,th{
+    border: 1px solid black;
+}
   

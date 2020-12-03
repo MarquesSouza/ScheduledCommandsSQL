@@ -9,19 +9,16 @@ function app() {
   const [time,setTime]=useState('');
   const [command,setCommand]=useState('');
   
-  const [scheduleRule,setScheduleRule]=useState([{
-    'id':'1','name':'faker','datasouce':'datafaker','initial':'bancofaker','type':'faker','days':'name','time':'name','command':'trolando 123' 
- 
-  }])
+  const [scheduleRule,setScheduleRule]=useState([''])
   function filtrar(){
 
   }
   function handleCreateShedule(e){
     e.preventDefault();
     setScheduleRule([...scheduleRule,{
-      'id':name,'name':name,'datasouce':datasouce,'initial':initial,'type':type,'days':days,'time':time,'command':command 
+      'id':time,'name':name,'datasouce':datasouce,'initial':initial,'type':type,'days':days,'time':time,'command':command, 'status':1 
     }])
-    alert("Handle Request");
+    console.days
   }
   return (
     <div>
@@ -119,17 +116,6 @@ function app() {
          
           </div>
       </form>
-      <table>
-                {scheduleRule.map((item)=>
-                  <tr key={item.id}>
-                    <td>{item.name+" /"}</td>
-                    <td>{item.datasouce+" /"}</td>
-                    <td>{item.initial+" /"}</td>
-                    <td>{item.type+" /"}</td>
-                    <td>{item.command+" /"}</td>
-                  </tr>
-                 )}
-        </table>
           <div className="lista">
             <legend className="control-label">Agendamentos</legend>
               <div className="containter-filtro">
@@ -169,6 +155,31 @@ function app() {
               </div>
                
                 
+              </div>
+              <div>
+              <table className="table">
+                  <tr>
+                  <th>Nome da Regra</th>
+                  <th>DataSouce</th>
+                  <th>Banco</th>
+                  <th>Typo de Regra</th>
+                  <th>Dia da Semana</th>
+                  <th>Hora</th>
+                  <th>Situação da Regra</th>
+                  </tr>
+                {scheduleRule.map((item)=>
+                  <tr key={item.id+item.name}>
+                    <td>{item.name}</td>
+                    <td>{item.datasouce}</td>
+                    <td>{item.initial}</td>
+                    <td>{item.type}</td>
+                    <td>{item.days}</td>
+                    <td>{item.time}</td>
+                    <td>{item.status}</td>
+                  </tr>
+                 )}
+        </table>
+      
               </div>
             </div>
           
