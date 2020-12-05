@@ -1,4 +1,4 @@
-import React,{useState,FormEvent} from 'react';
+import React,{useState} from 'react';
 
 function app() {
   const [name,setName]=useState('');
@@ -10,6 +10,7 @@ function app() {
   const [command,setCommand]=useState('');
   
   const [scheduleRule,setScheduleRule]=useState([''])
+   
   function filtrar(){
 
   }
@@ -20,6 +21,7 @@ function app() {
     }])
     console.days
   }
+  
   return (
     <div>
       <div className="top">
@@ -62,31 +64,31 @@ function app() {
                       <label className="control-label" >Dias da Semana</label>
                       <div className="checkbox">
                         <label className="checkbox-inline" >
-                          <input type="checkbox" name="days" id="semana-0" value="1" onChange={(e)=>{setDays(e.target.value)}}/>
+                          <input type="checkbox" name="days" id="semana-0" value=" Dog" onChange={(e)=>{setDays([...days,e.target.value])}}/>
                             <span>Domingo</span>
                         </label>
                         <label className="checkbox-inline" >
-                          <input type="checkbox" name="days" id="semana-1" value="2" onChange={(e)=>{setDays(e.target.value)}}/>
+                          <input type="checkbox" name="days" id="semana-1" value=" Seg" onChange={(e)=>{setDays([...days,e.target.value])}}/>
                           <span>Segunda</span>
                         </label>
                         <label className="checkbox-inline" >
-                          <input type="checkbox" name="days" id="semana-2" value="3"onChange={(e)=>{setDays(e.target.value)}}/>
+                          <input type="checkbox" name="days" id="semana-2" value=" Ter"onChange={(e)=>{setDays([...days,e.target.value])}}/>
                           <span>Terça</span>
                         </label>
                         <label className="checkbox-inline" >
-                          <input type="checkbox" name="days" id="semana-3" value="4" onChange={(e)=>{setDays(e.target.value)}}/>
+                          <input type="checkbox" name="days" id="semana-3" value=" Qua" onChange={(e)=>{setDays([...days,e.target.value])}}/>
                           <span>Quarta</span>
                         </label>
                         <label className="checkbox-inline" >
-                          <input type="checkbox" name="days" id="semana-4" value="5"onChange={(e)=>{setDays(e.target.value)}}/>
+                          <input type="checkbox" name="days" id="semana-4" value=" Qui"onChange={(e)=>{setDays([...days,e.target.value])}}/>
                           <span>Quinta</span>
                         </label>
                         <label className="checkbox-inline" >
-                          <input type="checkbox" name="days" id="semana-5" value="6" onChange={(e)=>{setDays(e.target.value)}}/>
+                          <input type="checkbox" name="days" id="semana-5" value=" Sex" onChange={(e)=>{setDays([...days,e.target.value])}}/>
                           <span>Sexta</span>
                         </label>
                         <label className="checkbox-inline" >
-                          <input type="checkbox" name="days" id="semana-6" value="7" onChange={(e)=>{setDays(e.target.value)}}/>
+                          <input type="checkbox" name="days" id="semana-6" value=" Sab" onChange={(e)=>{setDays([...days,e.target.value])}}/>
                             <span>Sábado</span>
                         </label>
                       </div>
@@ -172,14 +174,14 @@ function app() {
                     <td>{item.name}</td>
                     <td>{item.datasouce}</td>
                     <td>{item.initial}</td>
-                    <td>{item.type}</td>
+                    <td>{item.type&&1?"Agendado":item.type&&null?"Ao iniciar":''}</td>
                     <td>{item.days}</td>
                     <td>{item.time}</td>
-                    <td>{item.status}</td>
+                    <td>{item.status&&1?"Ativo":item.type&&null?"Desativo":''}</td>
                   </tr>
                  )}
         </table>
-      
+                  
               </div>
             </div>
           
