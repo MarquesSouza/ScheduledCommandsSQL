@@ -9,14 +9,21 @@ function app() {
   const [time,setTime]=useState('');
   const [command,setCommand]=useState('');
   
-  const [scheduleRule,setScheduleRule]=useState([''])
+  const [scheduleRule,setScheduleRule]=useState('')
    
   function filtrar(){
 
   }
   function handleCreateShedule(e){
     e.preventDefault();
+    
     let daysInput='';
+    let timeInput='';
+    if(e.target['type'].value==1){
+      timeInput='-'
+      daysInput='-'
+    }else{
+    timeInput=time;
     if(e.target['dog'].checked) daysInput=daysInput+' Dog'
     if(e.target['seg'].checked) daysInput=daysInput+' Seg'
     if(e.target['ter'].checked) daysInput=daysInput+' Ter'
@@ -24,10 +31,10 @@ function app() {
     if(e.target['qui'].checked) daysInput=daysInput+' Qui'
     if(e.target['sex'].checked) daysInput=daysInput+' Sex'
     if(e.target['sab'].checked) daysInput=daysInput+' Sab'
+    } 
     setScheduleRule([...scheduleRule,{
-      'id':time,'name':name,'datasouce':datasouce,'initial':initial,'type':type,'days':daysInput,'time':time,'command':command, 'status':1 
+      'id':name,'name':name,'datasouce':datasouce,'initial':initial,'type':type,'days':daysInput,'time':timeInput,'command':command, 'status':1 
     }])
-    console.days
   }
   
   return (
@@ -41,15 +48,15 @@ function app() {
               <fieldset >  
                  <legend>Dados da Regra</legend>
                 <div className="form-group">
-                  <input id="name" name="name" type="text" placeholder="Digite aqui o nome da regra" className="form-control input-md" onChange={(e)=>{setName(e.target.value)}}/>
+                  <input id="name" name="name" type="text" placeholder="Digite aqui o nome da regra" className="form-control input-md" onChange={(e)=>{setName(e.target.value)}} required/>
                 </div>
                 <div className="form-group">
                   <label >Data Souce</label>  
-                  <input id="datasouce" name="datasouce" type="text" placeholder="Servidor\SQL2017" className="form-control input-md" onChange={(e)=>{setDatasouce(e.target.value)}}/>
+                  <input id="datasouce" name="datasouce" type="text" placeholder="Servidor\SQL2017" className="form-control input-md" onChange={(e)=>{setDatasouce(e.target.value)}} required/>
                 </div>
                 <div className="form-group">
                   <label >Initial Catalog</label>  
-                  <input id="initial" name="initial" type="text" placeholder="max" className="form-control input-md" onChange={(e)=>{setInitial(e.target.value)}}/>
+                  <input id="initial" name="initial" type="text" placeholder="max" className="form-control input-md" onChange={(e)=>{setInitial(e.target.value)}} required/>
                 </div>
                 </fieldset>
               </div>
@@ -59,7 +66,7 @@ function app() {
                 <div>
                   <div className="radio">
                     <label >
-                    <input type="radio" name="type" id="type-0" value="1" onChange={(e)=>{setType(e.target.value)}} />
+                    <input type="radio" name="type" id="type-0" value="1" onChange={(e)=>{setType(e.target.value)}} defaultChecked />
                     <span> Somente ao Iniciar o Windows </span>
                     </label>
 	                </div>
@@ -72,7 +79,7 @@ function app() {
                       <label className="control-label" >Dias da Semana</label>
                       <div className="checkbox">
                         <label className="checkbox-inline" >
-                          <input type="checkbox" name="dog" id="semana-0"/>
+                          <input type="checkbox" name="dog" id="semana-0"checked />
                             <span>Domingo</span>
                         </label>
                         <label className="checkbox-inline" >
@@ -104,7 +111,7 @@ function app() {
                       <div className="time">
                         <label className="control-label" >Time</label>  
                         <div className="form-group">
-                        <input id="time" name="time" type="time" placeholder="00:00" onChange={(e)=>{setTime(e.target.value)}} />
+                        <input id="time" name="time" type="time" placeholder="00:00"  onChange={(e)=>{setTime(e.target.value)}} />
                         </div>
                       </div>
                   </div>
@@ -113,7 +120,7 @@ function app() {
               <div className="container-comando">
                 <label   className="control-label">Comando SQL</label>
                 <div >                     
-                  <textarea className="form-control" id="comando" name="comando" placeholder="Digite aqui o comando SQL" onChange={(e)=>{setCommand(e.target.value)}}></textarea>
+                  <textarea className="form-control" id="comando" name="comando" placeholder="Digite aqui o comando SQL" onChange={(e)=>{setCommand(e.target.value)}} required></textarea>
                 </div>
               </div>
 
@@ -171,23 +178,25 @@ function app() {
                   <tr>
                   <th>Nome da Regra</th>
                   <th>DataSouce</th>
-                  <th>Banco</th>
+                  <th>Initial</th>
                   <th>Typo de Regra</th>
                   <th>Dia da Semana</th>
                   <th>Hora</th>
                   <th>Situação da Regra</th>
+                  <th>Editar</th>
                   </tr>
-                {scheduleRule.map((item)=>
+                {scheduleRule.length>0?scheduleRule.map((item)=>
                   <tr key={item.id+item.name}>
                     <td>{item.name}</td>
                     <td>{item.datasouce}</td>
                     <td>{item.initial}</td>
-                    <td>{item.type&&1?"Agendado":item.type&&null?"Ao iniciar":''}</td>
+                    <td>{item.type&&1?"Agendado":"Ao iniciar"}</td>
                     <td>{item.days}</td>
                     <td>{item.time}</td>
-                    <td>{item.status&&1?"Ativo":item.type&&null?"Desativo":''}</td>
+                    <td><button>{item.status&&1?"Ativo":"Desativo"}</button></td>
+                    <td><button>Editar</button></td>
                   </tr>
-                 )}
+                 ):''}
         </table>
                   
               </div>

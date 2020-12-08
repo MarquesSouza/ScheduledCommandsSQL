@@ -148,8 +148,22 @@ h2{
 }
 .table{
     width: 100%;
+    background-color: white;
+    align-items: center;
+
 } 
 td,th{
-    border: 1px solid black;
+    border: 1px solid grey;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1px;
 }
-  
+th{
+    background-color: darkgray;
+}
+td{
+    text-align: center;
+}
+td button{
+    width: 100%;
+}  
