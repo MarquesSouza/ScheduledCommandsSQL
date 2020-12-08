@@ -16,8 +16,16 @@ function app() {
   }
   function handleCreateShedule(e){
     e.preventDefault();
+    let daysInput='';
+    if(e.target['dog'].checked) daysInput=daysInput+' Dog'
+    if(e.target['seg'].checked) daysInput=daysInput+' Seg'
+    if(e.target['ter'].checked) daysInput=daysInput+' Ter'
+    if(e.target['qua'].checked) daysInput=daysInput+' Qua'
+    if(e.target['qui'].checked) daysInput=daysInput+' Qui'
+    if(e.target['sex'].checked) daysInput=daysInput+' Sex'
+    if(e.target['sab'].checked) daysInput=daysInput+' Sab'
     setScheduleRule([...scheduleRule,{
-      'id':time,'name':name,'datasouce':datasouce,'initial':initial,'type':type,'days':days,'time':time,'command':command, 'status':1 
+      'id':time,'name':name,'datasouce':datasouce,'initial':initial,'type':type,'days':daysInput,'time':time,'command':command, 'status':1 
     }])
     console.days
   }
@@ -64,31 +72,31 @@ function app() {
                       <label className="control-label" >Dias da Semana</label>
                       <div className="checkbox">
                         <label className="checkbox-inline" >
-                          <input type="checkbox" name="days" id="semana-0" value=" Dog" onChange={(e)=>{setDays([...days,e.target.value])}}/>
+                          <input type="checkbox" name="dog" id="semana-0"/>
                             <span>Domingo</span>
                         </label>
                         <label className="checkbox-inline" >
-                          <input type="checkbox" name="days" id="semana-1" value=" Seg" onChange={(e)=>{setDays([...days,e.target.value])}}/>
+                          <input type="checkbox" name="seg" id="semana-1" />
                           <span>Segunda</span>
                         </label>
                         <label className="checkbox-inline" >
-                          <input type="checkbox" name="days" id="semana-2" value=" Ter"onChange={(e)=>{setDays([...days,e.target.value])}}/>
+                          <input type="checkbox" name="ter" id="semana-2" />
                           <span>Terça</span>
                         </label>
                         <label className="checkbox-inline" >
-                          <input type="checkbox" name="days" id="semana-3" value=" Qua" onChange={(e)=>{setDays([...days,e.target.value])}}/>
+                          <input type="checkbox" name="qua" id="semana-3" />
                           <span>Quarta</span>
                         </label>
                         <label className="checkbox-inline" >
-                          <input type="checkbox" name="days" id="semana-4" value=" Qui"onChange={(e)=>{setDays([...days,e.target.value])}}/>
+                          <input type="checkbox" name="qui" id="semana-4" />
                           <span>Quinta</span>
                         </label>
                         <label className="checkbox-inline" >
-                          <input type="checkbox" name="days" id="semana-5" value=" Sex" onChange={(e)=>{setDays([...days,e.target.value])}}/>
+                          <input type="checkbox" name="sex" id="semana-5"/>
                           <span>Sexta</span>
                         </label>
                         <label className="checkbox-inline" >
-                          <input type="checkbox" name="days" id="semana-6" value=" Sab" onChange={(e)=>{setDays([...days,e.target.value])}}/>
+                          <input type="checkbox" name="sab" id="semana-6" />
                             <span>Sábado</span>
                         </label>
                       </div>
