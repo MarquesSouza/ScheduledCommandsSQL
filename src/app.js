@@ -1,12 +1,13 @@
 import React,{useState} from 'react';
 
 function app() {
+  const[id,setId]=useState('')
   const [name,setName]=useState('');
   const [datasouce,setDatasouce]=useState('');
   const [initial,setInitial]=useState('');
   const [type,setType]=useState('');
-  const [days,setDays]=useState('');
   const [time,setTime]=useState('');
+  const [status,setStatus]=useState();
   const [command,setCommand]=useState('');
   
   const [scheduleRule,setScheduleRule]=useState('')
@@ -14,8 +15,35 @@ function app() {
   function filtrar(){
 
   }
+  function UpdateShedule(id){
+    scheduleRule.map((item)=>{
+      if(item.id==id){
+        setId(id);
+        setName(item.name)
+        setDatasouce(item.datasouce)
+        setInitial(item.initial)
+        setTime(item.time)
+        setCommand(item.command)
+      }
+    })
+  }
+  function toggleHandledStatus(id){
+    scheduleRule.map((item)=>{
+      if(item.id==id){
+         if(item.status==1){
+           setStatus(2)
+         }else{
+           setStatus(1)
+         } 
+      }
+      
+    })
+  }
   function handleCreateShedule(e){
     e.preventDefault();
+
+    //temporario
+    var rand =Math.random()
     
     let daysInput='';
     let timeInput='';
@@ -24,18 +52,24 @@ function app() {
       daysInput='-'
     }else{
     timeInput=time;
-    if(e.target['dog'].checked) daysInput=daysInput+' Dog'
-    if(e.target['seg'].checked) daysInput=daysInput+' Seg'
-    if(e.target['ter'].checked) daysInput=daysInput+' Ter'
-    if(e.target['qua'].checked) daysInput=daysInput+' Qua'
-    if(e.target['qui'].checked) daysInput=daysInput+' Qui'
-    if(e.target['sex'].checked) daysInput=daysInput+' Sex'
-    if(e.target['sab'].checked) daysInput=daysInput+' Sab'
+    if(e.target['dog'].checked) daysInput=[...daysInput,' Dog ']
+    if(e.target['seg'].checked) daysInput=[...daysInput,' Seg ']
+    if(e.target['ter'].checked) daysInput=[...daysInput,' Ter ']
+    if(e.target['qua'].checked) daysInput=[...daysInput,' Qua ']
+    if(e.target['qui'].checked) daysInput=[...daysInput,' Qui ']
+    if(e.target['sex'].checked) daysInput=[...daysInput,' Sex ']
+    if(e.target['sab'].checked) daysInput=[...daysInput,' Sab ']
     } 
     setScheduleRule([...scheduleRule,{
-      'id':name,'name':name,'datasouce':datasouce,'initial':initial,'type':type,'days':daysInput,'time':timeInput,'command':command, 'status':1 
+      'id':rand,'name':name,'datasouce':datasouce,'initial':initial,'type':type,'days':daysInput,'time':timeInput,'command':command, 'status':1 
     }])
-  }
+    setId('');
+    setName('')
+    setDatasouce('')
+    setInitial('')
+    setTime('')
+    setCommand('')
+    }
   
   return (
     <div>
@@ -48,15 +82,15 @@ function app() {
               <fieldset >  
                  <legend>Dados da Regra</legend>
                 <div className="form-group">
-                  <input id="name" name="name" type="text" placeholder="Digite aqui o nome da regra" className="form-control input-md" onChange={(e)=>{setName(e.target.value)}} required/>
+                  <input id="name" name="name" type="text" placeholder="Digite aqui o nome da regra" className="form-control input-md" onChange={(e)=>{setName(e.target.value)}} value={name} required/>
                 </div>
                 <div className="form-group">
                   <label >Data Souce</label>  
-                  <input id="datasouce" name="datasouce" type="text" placeholder="Servidor\SQL2017" className="form-control input-md" onChange={(e)=>{setDatasouce(e.target.value)}} required/>
+                  <input id="datasouce" name="datasouce" type="text" placeholder="Servidor\SQL2017" className="form-control input-md" onChange={(e)=>{setDatasouce(e.target.value)}} value={datasouce} required/>
                 </div>
                 <div className="form-group">
                   <label >Initial Catalog</label>  
-                  <input id="initial" name="initial" type="text" placeholder="max" className="form-control input-md" onChange={(e)=>{setInitial(e.target.value)}} required/>
+                  <input id="initial" name="initial" type="text" placeholder="max" className="form-control input-md" onChange={(e)=>{setInitial(e.target.value)}} value={initial} required/>
                 </div>
                 </fieldset>
               </div>
@@ -120,7 +154,7 @@ function app() {
               <div className="container-comando">
                 <label   className="control-label">Comando SQL</label>
                 <div >                     
-                  <textarea className="form-control" id="comando" name="comando" placeholder="Digite aqui o comando SQL" onChange={(e)=>{setCommand(e.target.value)}} required></textarea>
+                  <textarea className="form-control" id="comando" name="comando" placeholder="Digite aqui o comando SQL" onChange={(e)=>{setCommand(e.target.value)}} value={command}required></textarea>
                 </div>
               </div>
 
@@ -170,8 +204,6 @@ function app() {
                   
                 </div>
               </div>
-               
-                
               </div>
               <div>
               <table className="table">
@@ -186,15 +218,15 @@ function app() {
                   <th>Editar</th>
                   </tr>
                 {scheduleRule.length>0?scheduleRule.map((item)=>
-                  <tr key={item.id+item.name}>
+                  <tr key={item.id}>
                     <td>{item.name}</td>
                     <td>{item.datasouce}</td>
                     <td>{item.initial}</td>
                     <td>{item.type&&1?"Agendado":"Ao iniciar"}</td>
                     <td>{item.days}</td>
                     <td>{item.time}</td>
-                    <td><button>{item.status&&1?"Ativo":"Desativo"}</button></td>
-                    <td><button>Editar</button></td>
+                    <td><button onClick={()=>{toggleHandledStatus(item.id)}}>{item.status&&1?"Ativo":"Desativo"}</button></td>
+                    <td><button onClick={()=>{UpdateShedule(item.id)}}>Editar</button></td>
                   </tr>
                  ):''}
         </table>

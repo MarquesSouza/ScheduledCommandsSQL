@@ -15,7 +15,7 @@
     "postinstall": "install-app-deps",
     "build": "gulp build",
     "start": "gulp",
-    "clear":"rm -R app",
+    "clear": "rm -R app",
     "dist": "gulp dist"
   },
   "dependencies": {

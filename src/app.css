@@ -152,18 +152,21 @@ h2{
     align-items: center;
 
 } 
-td,th{
+.table td,th{
     border: 1px solid grey;
     align-items: center;
     justify-content: center;
     border-radius: 1px;
 }
-th{
+.table th{
     background-color: darkgray;
 }
-td{
+.table td{
     text-align: center;
 }
-td button{
+.table td button{
     width: 100%;
+    background-color: green;
+    border: 1px solid black;    
+    color: white;
 }  
