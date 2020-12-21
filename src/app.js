@@ -11,7 +11,22 @@ function app() {
   const [command,setCommand]=useState('');
   
   const [scheduleRule,setScheduleRule]=useState('')
-   
+  const [temp,setTemp]=useState('');
+  function systemTime(){
+    const locale='pt-br';
+    const DateSystem=new Date()
+    const horaSystem=DateSystem.getHours()
+    setTemp(horaSystem)
+  }
+  setTemp(1)
+  function repeti(){
+  var timer=setTimeout(function run(){
+    const soma=temp+1
+    setTemp(soma)
+    setTimeout(run,1000)
+  },1000)
+  }
+  repeti()
   function filtrar(){
 
   }
@@ -40,6 +55,7 @@ function app() {
     })
   }
   function handleCreateShedule(e){
+    systemTime()
     e.preventDefault();
 
     //temporario
@@ -76,6 +92,9 @@ function app() {
       <div className="top">
       <h2>Agendador de Comandos SQL</h2>
       </div>
+      <div>
+        
+        <h1>{interval}</h1></div>
       <form onSubmit={handleCreateShedule}>
         <div className="regra">
               <div className="container-regra">
