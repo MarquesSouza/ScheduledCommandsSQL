@@ -1,60 +1,83 @@
-const { app, BrowserWindow, nativeImage } = require("electron");
+import electron,{dialog} from 'electron';
+import path from 'path';
+import url from 'url';
 
+const app = electron.app;
+const BrowserWindow = electron.BrowserWindow;
+let mainWindow;
 
-// Função que cria uma janela desktop
-function createWindow() {
-  // Adicionando um ícone na barra de tarefas/dock
-  const icon = nativeImage.createFromPath(`${app.getAppPath()}/build/icon.png`);
+// *Funcoes devem ser exportadas pra serem acessiveis ao front-end
+// Executa comando do SO e retorna resultado ao front-end
+// Outro processo é o IPCMaine IPCRenderer
+// https://electronjs.org/docs/api/ipc-main
+// https://electronjs.org/docs/api/ipc-renderer
+exports.execProcess = (process, callback) => {
+  const { exec } = require('child_process');
+  const callExec = exec(process)
 
-  if (app.dock) {
-    app.dock.setIcon(icon);
-  }
-
-  // Cria uma janela de desktop
-  const win = new BrowserWindow({
-    icon,
-    width: 800,
-    height: 600,
-    webPreferences: {
-      // habilita a integração do Node.js no FrontEnd
-      nodeIntegration: true,
-    },
-  });
-
-  // carrega a janela com o conteúdo dentro de index.html
-  win.loadFile("index.html");
-
-  // Abre o console do navegador (DevTools),
-  // manter apenas quando estiver desenvolvendo a aplicação,
-  // pode utilizar variáveis de ambiente do node para executar esse código apenas quando estiver em modo DEV
-  // win.webContents.openDevTools();
+  callExec.stdout.on('data', function(data){
+    callback(data)
+  })
+  callExec.stderr.on('data', function(data){
+    callback("<b>ERROR:</b> \n" + data)
+  })
 }
 
-// Método vai ser chamado assim que o Electron finalizar sua inicialização
-// e estiver pronto para abrir e manipular o nosso código.
-// Algumas APIs podem ser usadas somente depois que este evento ocorre.
-app.whenReady().then(createWindow);
+const createWindow = () => {
+  mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    
+    // Caracteristicas visuais da janela
+    // autoHideMenuBar: true,
+    // titleBarStyle: 'customButtonsOnHover',
+    //frame: false, // Retira barra superior
+    //useContentSize: false, // Inibe mostragem de dimensao da janela
 
-// Quando clicarmos no botão de fechar a janela no app desktop
-// O evento vai ser ouvido aqui no arquivo main.js e algum procedimento pode ser realizado
-// tipo fechar alguma conexão de banco de dados por exemplo.
-app.on("window-all-closed", () => {
-  // No MacOS quando fecha uma janela, na verdade ela é "minimizada"
-  // e o processo executa em segundo-plano tipo um app do celular
-  // Para fechar e encerrar o app tem que teclar Cmd+Q ou no dock (barra de tarefas)
-  // clicar com botão direito e encerrar o app
-  if (process.platform !== "darwin") {
-    app.quit();
+    webPreferences: {
+      nodeIntegration: true
+    }
+  });
+  //mainWindow.removeMenu();
+
+  mainWindow.loadURL(url.format({
+    pathname: path.join(__dirname, 'index.html'),
+    protocol: 'file:',
+    slashes: true
+  }));
+
+  mainWindow.on('closed', () => {
+    mainWindow = null;
+  });
+};
+
+app.on('close',(event)=>{
+  event.preventDefault()
+  let options={}
+  options.type=typeMessage
+  options.buttons=["&Ok"]
+  options.defaultId=0
+  options.title=titleMessage
+  options.message=messageText
+  options.normalizeAccessKeys = true
+  dialog.showMessageBox(app,options,(res)=>{
+    if(res===0){
+      app.destroy()
+    }
+  })
+})
+
+
+app.on('ready', createWindow);
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit()
   }
 });
 
-app.on("activate", () => {
-  // Esse evento é disparado pelo MacOS quando clica no ícone do aplicativo no Dock.
-  // Basicamente cria a janela se não foi criada.
-  if (BrowserWindow.getAllWindows().length === 0) {
+app.on('activate', () => {
+  if (mainWindow === null) {
     createWindow();
   }
 });
-
-// Abaixo você pode colocar seus códigos específicos do BackEnd que precisam executar no processo principal
-// pode criar pastas e arquivos separados e importar aqui (boa prática).
