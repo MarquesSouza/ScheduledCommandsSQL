@@ -10,7 +10,9 @@
 [ ]Refatorar Css e components styles 
 [ ]Conexão com banco de dados Sql do projeto
 [ ]Conexão com banco de dados externo
-
+[ ]Checkbox checked update data presents
+[ ]Radios buttons updates components
+ 
 #Processo Paralelo
 [ ]Rotina de teste para correção de bugs
 [ ]Separação modular dos components
