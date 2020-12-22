@@ -1,5 +1,7 @@
 import React,{useState} from 'react';
-
+const {remote}=require('electron')
+const dialog=remote.dialog
+let win=remote.getCurrentWindow()
 function app() {
   const [InputId,setInputCurrentId]=useState('')
   const [InputName,setInputName]=useState('');
@@ -18,6 +20,18 @@ function app() {
     const DateSystem=new Date()
     const horaSystem=DateSystem.getHours()
     setCurrentTime(horaSystem)
+  }
+  function ShowMessageWindowsBox(titleMessage,messageText,typeMessage){
+    let options={}
+      options.buttons=["&OK"]
+      options.title=titleMessage
+      options.message=messageText
+      options.type=typeMessage
+      dialog.showMessageBox(win,options,(res)=>{
+        if(res===0){
+          win.destroy()
+        }
+      })
   }
   function UpdateShedule(id){
     scheduleRule.map((item)=>{
@@ -77,6 +91,7 @@ function app() {
       'command':InputCommandSchedule,
       'status':1 
     }])
+    ShowMessageWindowsBox("Cadastro","Cadastro concluido com sucesso!","info")
     setInputCurrentId('');
     setInputName('')
     setInputDataSouce('')
@@ -84,6 +99,7 @@ function app() {
     setInputTimeSchedule('')
     setInputCommandSchedule('')
     setInputStatusSchedule('')
+    
     }
   
   return (

@@ -1,7 +1,7 @@
 #Checklist
 
 #Funcionais
-[ ]Função exibir mensagens para cadastro e notificação
+[*]Função exibir mensagens para cadastro e notificação
 [ ]Função Update agendamento
 [ ]Função desativar agendamento and excluir
 [ ]Função Execultar agendamento ao iniciar projeto

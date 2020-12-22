@@ -1,4 +1,4 @@
-import electron from 'electron';
+import electron,{dialog} from 'electron';
 import path from 'path';
 import url from 'url';
 
@@ -50,6 +50,23 @@ const createWindow = () => {
     mainWindow = null;
   });
 };
+
+app.on('close',(event)=>{
+  event.preventDefault()
+  let options={}
+  options.type=typeMessage
+  options.buttons=["&Ok"]
+  options.defaultId=0
+  options.title=titleMessage
+  options.message=messageText
+  options.normalizeAccessKeys = true
+  dialog.showMessageBox(app,options,(res)=>{
+    if(res===0){
+      app.destroy()
+    }
+  })
+})
+
 
 app.on('ready', createWindow);
 
