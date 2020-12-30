@@ -3,3 +3,5 @@ node_modules
 database/database.sqlite
 ./yarn.lock
 ./package.lock
+./yarn-error.log
+./.env
