@@ -1,7 +1,13 @@
+import { Resolver } from 'dns';
+import { promises } from 'fs';
+import { resolve } from 'path';
 import React,{useState} from 'react';
 const {remote}=require('electron')
 const dialog=remote.dialog
 let win=remote.getCurrentWindow()
+import ScheduleController from '../src/controllers/schedule';
+
+
 function app() {
   const [InputId,setInputCurrentId]=useState('')
   const [InputName,setInputName]=useState('');
@@ -14,7 +20,19 @@ function app() {
   
   const [scheduleRule,setScheduleRule]=useState('')
   const [CurrentTime,setCurrentTime]=useState('');
-
+  
+  const ScheduleControllers=new ScheduleController()
+  let ScheduleRetorno=ScheduleControllers.find()
+  let returno=null
+  ScheduleRetorno.then((value)=>{
+    returno=value
+    return returno
+  }).catch((err)=>{
+    console.log(err)
+  })
+  console.log(returno)
+  ShowMessageWindowsBox("Atualização","Atualização da regra "+ScheduleRetorno+" !","info")
+  
   function UpdateCurrentTime(){
     const locale='pt-br';
     const DateSystem=new Date()
@@ -43,8 +61,39 @@ function app() {
         setInputTimeSchedule(item.time)
         setInputCommandSchedule(item.command)
         setInputTypeSchedule(item.type_schedule)
+      
+      //  ShowMessageWindowsBox("Atualização","Atualização da regra "+item.name+" !","info")
+      ShowMessageWindowsBox("Atualização","Atualização da regra "+InputName+" !","info")
+  
       }
     })
+    const scheduleRuleCurrent={
+      'id':rand,
+      'name':InputName,
+      'datasouce':InputDataSouce,
+      'initial':InputInitial,
+      'type_schedule':InputTypeSchedule,
+      'weeks':weeksInput,
+      'time':InputTimeSchedule,
+      'command':InputCommandSchedule,
+      'status':1 
+    }
+    setScheduleRule(scheduleRule=>[...scheduleRule,`${scheduleRuleCurrent.length}`])
+
+  }
+  function DelectShedule(id){
+    scheduleRule.map((item)=>{
+      if(item.id==id){
+        setInputCurrentId(id);
+        setInputName(item.name)
+        setInputDataSouce(item.datasouce)
+        setInputInitial(item.initial)
+        setInputTimeSchedule(item.time)
+        setInputCommandSchedule(item.command)
+        setInputTypeSchedule(item.type_schedule)
+        ShowMessageWindowsBox("Exclusão","Exclusão da regra "+InputName+" !","info")
+        
+      }})
   }
   function toggleHandledStatus(id){
     scheduleRule.map((item)=>{
@@ -91,7 +140,7 @@ function app() {
       'command':InputCommandSchedule,
       'status':1 
     }])
-    ShowMessageWindowsBox("Cadastro","Cadastro concluido com sucesso!","info")
+    ShowMessageWindowsBox("Cadastro","Cadastro da regra "+InputName+" concluido com sucesso! <br> comando "+InputCommandSchedule,"info")
     setInputCurrentId('');
     setInputName('')
     setInputDataSouce('')
@@ -199,13 +248,14 @@ function app() {
               
               
               <div className="container-button">
-                  <button type="submit" >Adicionar Agendamento</button>
+                  <button className="button-green" type="submit" >Adicionar Agendamento</button>
+                  <button className="button-red" type="button" onclick={()=>{toggleHandledStatus()}} id={InputId==''?'button-hidden':'button-show'} >Excluir Agendamento</button>
               </div>
               
          
           </div>
       </form>
-          <div className="lista">
+          <div className="container-lista">
             <legend className="control-label">Agendamentos</legend>
               <div className="containter-filtro">
               <div className="form-group">

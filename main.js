@@ -25,7 +25,7 @@ exports.execProcess = (process, callback) => {
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({
-    width: 800,
+    width: 1020,
     height: 600,
     
     // Caracteristicas visuais da janela
