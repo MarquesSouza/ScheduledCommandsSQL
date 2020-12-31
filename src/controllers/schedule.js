@@ -6,11 +6,11 @@ class ScheduleController{
         .select('*').from('schedules');
          return schedules; 
      }
-    async find(idInternal){
+    async find(queryParametroFiltro){
         let schedules
-        if(idInternal==''){
+        if(queryParametroFiltro!=''){
         schedules= await databaseInterna('schedules')
-       .select('*').from('schedules').where('schedules.id','=',idInternal);
+       .select('*').from('schedules').where('schedules.id','=', queryParametroFiltro);
        }else{
         schedules= await databaseInterna('schedules')
        .select('*').from('schedules');

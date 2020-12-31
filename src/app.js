@@ -21,11 +21,19 @@ function app() {
   
   const [scheduleRule,setScheduleRule]=useState('')
   const [CurrentTime,setCurrentTime]=useState('');
-  
   const ScheduleControllers=new ScheduleController()
-  ScheduleControllers.find().then((resolve,rejects)=>{
+ 
+  function GetScheduleDataBase(){    
+  ScheduleControllers.find('').then((resolve,rejects)=>{
       setScheduleRule(resolve) 
   })
+  }
+  function HandleFiltrarLista(){    
+    ScheduleControllers.find(10).then((resolve,rejects)=>{
+      setScheduleRule(resolve)       
+  })
+    
+  }
   function UpdateCurrentTime(){
     const locale='pt-br';
     const DateSystem=new Date()
@@ -54,7 +62,6 @@ function app() {
         setInputTimeSchedule(item.time)
         setInputCommandSchedule(item.command)
         setInputTypeSchedule(item.type_schedule)
-      
       //  ShowMessageWindowsBox("Atualização","Atualização da regra "+item.name+" !","info")
       ShowMessageWindowsBox("Atualização","Atualização da regra "+InputName+" !","info")
   
@@ -143,6 +150,7 @@ function app() {
     setInputStatusSchedule('')
     
     }
+    GetScheduleDataBase()
   
   return (
     <div>
@@ -281,7 +289,7 @@ function app() {
               <div className="container-button-filtrar">
                 <label ></label>
                 <div className="col-md-4">
-                  <button id="submit" name="submit" className="btn btn-primary" >Filtrar...</button>
+                  <button onClick={()=>{HandleFiltrarLista(event)}}  className="btn btn-primary" >Filtrar...</button>
                   
                 </div>
               </div>
