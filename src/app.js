@@ -1,3 +1,4 @@
+import { rejects } from 'assert';
 import { Resolver } from 'dns';
 import { promises } from 'fs';
 import { resolve } from 'path';
@@ -22,17 +23,9 @@ function app() {
   const [CurrentTime,setCurrentTime]=useState('');
   
   const ScheduleControllers=new ScheduleController()
-  let ScheduleRetorno=ScheduleControllers.find()
-  let returno=null
-  ScheduleRetorno.then((value)=>{
-    returno=value
-    return returno
-  }).catch((err)=>{
-    console.log(err)
+  ScheduleControllers.find().then((resolve,rejects)=>{
+      setScheduleRule(resolve) 
   })
-  console.log(returno)
-  ShowMessageWindowsBox("Atualização","Atualização da regra "+ScheduleRetorno+" !","info")
-  
   function UpdateCurrentTime(){
     const locale='pt-br';
     const DateSystem=new Date()
