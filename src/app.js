@@ -24,7 +24,7 @@ function app() {
   const ScheduleControllers=new ScheduleController()
  
   function GetScheduleDataBase(){    
-  ScheduleControllers.find('').then((resolve,rejects)=>{
+  ScheduleControllers.all().then((resolve,rejects)=>{
       setScheduleRule(resolve) 
   })
   }
@@ -129,8 +129,7 @@ function app() {
     if(e.target['sex'].checked) weeksInput=[...weeksInput,' Sex ']
     if(e.target['sab'].checked) weeksInput=[...weeksInput,' Sab ']
     } 
-    setScheduleRule([...scheduleRule,{
-      'id':rand,
+    const ScheculeRulesCurrent={
       'name':InputName,
       'datasouce':InputDataSouce,
       'initial':InputInitial,
@@ -139,8 +138,10 @@ function app() {
       'time':InputTimeSchedule,
       'command':InputCommandSchedule,
       'status':1 
-    }])
+    }
     ShowMessageWindowsBox("Cadastro","Cadastro da regra "+InputName+" concluido com sucesso! <br> comando "+InputCommandSchedule,"info")
+    ScheduleControllers.create(ScheculeRulesCurrent)
+    
     setInputCurrentId('');
     setInputName('')
     setInputDataSouce('')
